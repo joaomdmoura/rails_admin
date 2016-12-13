@@ -1,1 +1,9 @@
-= form.text_area field.method_name, field.html_attributes.reverse_merge(data: { richtext: false, options: {}.to_json }).reverse_merge({ value: field.form_value, class: 'form-control', required: field.required })
+= form.text_area field.method_name, field.html_attributes.reverse_merge(data: { richtext: true, options: {}.to_json }).reverse_merge({ value: field.form_value, class: 'form-control hidden', required: field.required, id: field.method_name })
+
+%div.editable
+  = field.form_value.html_safe if field.form_value
+%script
+  var editor = new MediumEditor('.editable')
+  editor.subscribe('editableInput', function (event, editable) {
+  = "$('##{field.method_name}').val(editable.innerHTML);"
+  });
