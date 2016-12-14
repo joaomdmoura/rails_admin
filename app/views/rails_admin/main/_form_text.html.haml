@@ -3,7 +3,11 @@
 %div.editable
   = field.form_value.html_safe if field.form_value
 %script
-  var editor = new MediumEditor('.editable')
+  var editor = new MediumEditor('.editable', {
+  toolbar: {
+  buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote', 'pre', 'orderedlist', 'unorderedlist', 'justifyCenter']
+  }
+  })
   editor.subscribe('editableInput', function (event, editable) {
   = "$('##{field.method_name}').val(editable.innerHTML);"
   });
